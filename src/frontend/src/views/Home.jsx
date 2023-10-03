@@ -51,28 +51,28 @@ const Home = () => {
       style={{ padding: 7, flex: 1, background: '#F5F5F5' }}
       className="fmtm-flex fmtm-flex-col fmtm-justify-between"
     >
-      <div>
-        <HomePageFilters
-          onSearch={handleSearch}
-          filteredProjectCount={filteredProjectCards?.length}
-          totalProjectCount={stateHome.homeProjectSummary.length}
-        />
+      <div className="fmtm-h-full">
+        <div className="lg:fmtm-h-[11rem]">
+          <HomePageFilters
+            onSearch={handleSearch}
+            filteredProjectCount={filteredProjectCards?.length}
+            totalProjectCount={stateHome.homeProjectSummary.length}
+          />
+        </div>
         {stateHome.homeProjectLoading == false ? (
-          <div className="fmtm-flex fmtm-flex-col lg:fmtm-flex-row fmtm-gap-5">
-            <div className={`fmtm-w-full ${showMapStatus ? 'lg:fmtm-w-[50%]' : ''} `}>
+          <div style={{ height: 'calc(100% - 11rem)' }} className="fmtm-flex fmtm-flex-col lg:fmtm-flex-row fmtm-gap-5">
+            <div className={`fmtm-w-full fmtm-h-full lg:fmtm-relative ${showMapStatus ? 'lg:fmtm-w-[50%]' : ''} `}>
               {filteredProjectCards.length > 0 ? (
-                <div>
-                  <div
-                    className={`fmtm-px-[1rem] fmtm-grid fmtm-gap-5 ${
-                      !showMapStatus
-                        ? 'fmtm-grid-cols-1 sm:fmtm-grid-cols-2 md:fmtm-grid-cols-3 lg:fmtm-grid-cols-4 xl:fmtm-grid-cols-5 2xl:fmtm-grid-cols-6'
-                        : 'fmtm-grid-cols-1 sm:fmtm-grid-cols-2 md:fmtm-grid-cols-3 lg:fmtm-grid-cols-2 2xl:fmtm-grid-cols-3 lg:fmtm-h-[33rem] lg:fmtm-overflow-y-scroll lg:scrollbar fmtm-pr-1'
-                    }`}
-                  >
-                    {filteredProjectCards.map((value, index) => (
-                      <ExploreProjectCard data={value} key={index} />
-                    ))}
-                  </div>
+                <div
+                  className={`fmtm-px-[1rem] fmtm-grid fmtm-gap-5 ${
+                    !showMapStatus
+                      ? 'fmtm-grid-cols-1 sm:fmtm-grid-cols-2 md:fmtm-grid-cols-3 lg:fmtm-grid-cols-4 xl:fmtm-grid-cols-5 2xl:fmtm-grid-cols-6'
+                      : 'fmtm-grid-cols-1 sm:fmtm-grid-cols-2 md:fmtm-grid-cols-3 lg:fmtm-grid-cols-2 2xl:fmtm-grid-cols-3 lg:fmtm-absolute lg:fmtm-top-0 lg:fmtm-bottom-0 lg:fmtm-left-0 lg:fmtm-right-0 fmtm-min-h-max fmtm-max-h-full lg:fmtm-overflow-y-scroll lg:scrollbar fmtm-pr-1'
+                  }`}
+                >
+                  {filteredProjectCards.map((value, index) => (
+                    <ExploreProjectCard data={value} key={index} />
+                  ))}
                 </div>
               ) : (
                 <CoreModules.Typography
@@ -85,7 +85,11 @@ const Home = () => {
                 </CoreModules.Typography>
               )}
             </div>
-            {showMapStatus && <ProjectListMap />}
+            {showMapStatus && (
+              <div className="fmtm-h-[33rem] lg:fmtm-h-full lg:fmtm-order-last lg:fmtm-w-[50%]">
+                <ProjectListMap />
+              </div>
+            )}
           </div>
         ) : (
           <CoreModules.Stack
