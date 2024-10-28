@@ -71,8 +71,15 @@
 	const taskHistoryEvents = new Shape(taskHistoryStream);
 	const taskEventArray = writable([]);
 	const latestEvent = writable();
+
+	let selectedTaskId = writable<number | null>(null);
+	let featureClicked = writable(false);
+	let selectedTask = writable<any>(null);
+	let selectedTaskStatus = writable<string>('');
+
 	$: if ($latestEvent) {
 		updateTaskFeatures();
+		updateSelectedTaskState();
 	}
 
 	async function getLatestEventForTasks() {
@@ -115,25 +122,23 @@
 		});
 	}
 
+	async function updateSelectedTaskState() {
+		if ($selectedTask) {
+			const task = $selectedTask;
+			const latestActions = await getLatestEventForTasks();
+			const statusLabel = latestActions.get(task.id);
+			selectedTaskStatus.set(statusLabel ? statusLabel : 'RELEASED_FOR_MAPPING');
+		}
+	}
+
 	// *** Selected task *** //
 	$: qrCodeData = generateQrCode(data.project.project_info.name, data.project.odk_token, 'TEMP');
-
-	let selectedTaskId = writable<number | null>(null);
-	let featureClicked = writable(false);
-	let selectedTask = writable<any>(null);
-	let selectedTaskStatus = writable<string>('');
 
 	$: selectedTask.set(data.project.tasks.find((task: ProjectTask) => task.id === $selectedTaskId));
 
 	$: (async () => {
-		const task = $selectedTask;
-		if (task && task.id) {
-			const latestActions = await getLatestEventForTasks();
-			const statusLabel = latestActions.get(task.id);
-			selectedTaskStatus.set(statusLabel ? statusLabel : 'RELEASED_FOR_MAPPING');
-		} else {
-			selectedTaskStatus.set('');
-		}
+		$selectedTask;
+		updateSelectedTaskState();
 	})();
 
 	function zoomToTask(event: CustomEvent<ZoomToTaskEventDetail>) {
