@@ -5,7 +5,6 @@ import type { TaskStatus, TaskEvent } from '$lib/types';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export function statusEnumLabelToValue(statusLabel: string): string {
-	console.log(statusLabel);
 	// Check if the statusLabel exists in TaskStatusEnum
 	if (!(statusLabel in TaskStatusEnum)) {
 		throw new Error(`Invalid status string: ${statusLabel}`);
@@ -48,7 +47,6 @@ async function add_event(
 	});
 
 	if (resp.status !== 200) {
-		console.error('Failed to update status in API');
 		return false;
 	}
 
