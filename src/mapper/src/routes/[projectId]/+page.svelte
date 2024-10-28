@@ -447,7 +447,7 @@
 				class="bg-white w-[100vw] h-fit font-barlow-regular w-[100vw] md:max-w-[580px] pointer-events-auto px-4 pb-3 sm:pb-4 rounded-t-3xl"
 			>
 				<div class="flex justify-between items-center">
-					<p class="text-[#333] text-xl font-barlow-semibold leading-0 pt-2">Task #{$selectedTaskId}</p>
+					<p class="text-[#333] text-xl font-barlow-semibold pt-2">Task #{$selectedTaskId}</p>
 					<hot-icon
 						name="close"
 						class="!text-[1.5rem] text-[#52525B] cursor-pointer hover:text-red-600 duration-200"
@@ -471,10 +471,9 @@
 							class="primary"
 							on:click={mapTask(data.projectId, $selectedTaskId)}
 						>
-							<div class="flex items-center gap-1">
-								<hot-icon name="location" class="!text-[1rem] text-white cursor-pointer duration-200"></hot-icon>
-								<p class="font-barlow-medium text-sm leading-[0]">START MAPPING</p>
-							</div>
+							<hot-icon slot="prefix" name="location" class="!text-[1rem] text-white cursor-pointer duration-200"
+							></hot-icon>
+							<span class="font-barlow-medium text-sm">START MAPPING</span>
 						</sl-button>
 					</div>
 				{:else if $selectedTaskStatus == 'LOCKED_FOR_MAPPING'}
@@ -487,31 +486,30 @@
 							size="small"
 							class="secondary"
 						>
-							<div class="flex items-center gap-1">
-								<hot-icon
-									name="close"
-									class="!text-[1rem] text-[#d73f37] cursor-pointer duration-200 hover:text-[#b91c1c]"
-									on:click={() => (toggleTaskActionModal = false)}
-								></hot-icon>
-								<p class="font-barlow-medium text-sm leading-[0]">CANCEL MAPPING</p>
-							</div></sl-button
-						>
+							<hot-icon
+								name="close"
+								slot="prefix"
+								class="!text-[1rem] text-[#d73f37] cursor-pointer duration-200 hover:text-[#b91c1c]"
+								on:click={() => (toggleTaskActionModal = false)}
+							></hot-icon>
+							<span class="font-barlow-medium text-sm leading-0">CANCEL MAPPING</span>
+						</sl-button>
 						<sl-button
 							on:click={finishTask(data.projectId, $selectedTaskId)}
 							variant="default"
 							size="small"
-							class="primary"
-							><div class="flex items-center gap-1">
-								<hot-icon
-									name="check"
-									class="!text-[1rem] text-white cursor-pointer duration-200"
-									on:click={() => (toggleTaskActionModal = false)}
-								></hot-icon>
-								<p class="font-barlow-medium text-sm leading-[0]">COMPLETE MAPPING</p>
-							</div></sl-button
+							class="green"
 						>
-						<sl-button variant="default" size="small" class="gray col-span-2 sm:col-span-1">
-							<p class="font-barlow-medium text-sm leading-[0]">GO TO ODK</p>
+							<hot-icon
+								name="check"
+								slot="prefix"
+								class="!text-[1rem] text-white cursor-pointer duration-200"
+								on:click={() => (toggleTaskActionModal = false)}
+							></hot-icon>
+							<span class="font-barlow-medium text-sm leading-0">COMPLETE MAPPING</span>
+						</sl-button>
+						<sl-button variant="default" size="small" class="primary col-span-2 sm:col-span-1">
+							<span class="font-barlow-medium text-sm">GO TO ODK</span>
 						</sl-button>
 					</div>
 					<div class="flex justify-center gap-2"></div>
