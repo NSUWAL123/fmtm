@@ -584,16 +584,16 @@
 		bind:this={tabGroup}
 	>
 		<sl-tab slot="nav" panel="map">
-			<hot-icon name="map" class="!text-[1.7rem] !sm:text-[2rem]"></hot-icon>
-		</sl-tab>
-		<sl-tab slot="nav" panel="events">
-			<hot-icon name="list" class="!text-[1.7rem] !sm:text-[2rem]"></hot-icon>
+			<hot-icon name="map" class="!text-[1.5rem] !sm:text-[1.75rem]"></hot-icon>
 		</sl-tab>
 		<sl-tab slot="nav" panel="offline">
-			<hot-icon name="wifi-off" class="!text-[1.7rem] !sm:text-[2rem]"></hot-icon>
+			<hot-icon name="wifi-off" class="!text-[1.5rem] !sm:text-[1.75rem]"></hot-icon>
 		</sl-tab>
 		<sl-tab slot="nav" panel="qrcode">
-			<hot-icon name="qr-code" class="!text-[1.7rem] !sm:text-[2rem]"></hot-icon>
+			<hot-icon name="qr-code" class="!text-[1.5rem] !sm:text-[1.75rem]"></hot-icon>
+		</sl-tab>
+		<sl-tab slot="nav" panel="events">
+			<hot-icon name="three-dots" class="!text-[1.5rem] !sm:text-[1.75rem]"></hot-icon>
 		</sl-tab>
 	</sl-tab-group>
 </div>
